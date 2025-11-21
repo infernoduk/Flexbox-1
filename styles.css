@@ -1,0 +1,256 @@
+/* Define CSS variables in root for consistent theming */
+:root {
+    /* Color variables */
+    --primary-color: #333;
+    --primary-hover: #555;
+    --text-light: white;
+    --text-dark: #333;
+    --bg-light: white;
+    --bg-gray: #f4f4f4;
+    --bg-gray-hover: #ddd;
+    --card-image-bg: #ddd;
+    
+    /* Spacing variables */
+    --spacing-small: 0.5rem;
+    --spacing-medium: 1rem;
+    --spacing-large: 2rem;
+    
+    /* Layout variables */
+    --sidebar-width: 200px;
+    --card-border-radius: 5px;
+    --card-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    
+    /* Breakpoints */
+    --breakpoint-medium: 900px;
+    --breakpoint-small: 600px;
+}
+
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    min-height: 100vh;
+    /* Using flexbox to create a sticky footer by making the body a flex container */
+    display: flex;
+    /* flex-direction: column - stacks the children vertically */
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: var(--spacing-medium);
+    /* Using flexbox to position the site title and navigation */
+    display: flex;
+    /* justify-content: space-between - pushes the title to the left and nav to the right */
+    justify-content: space-between;
+    /* align-items: center - vertically centers the items */
+    align-items: center;
+    /* flex-wrap: wrap - allows the nav to wrap on smaller screens */
+    flex-wrap: wrap;
+}
+
+header h1 {
+    margin-right: var(--spacing-medium);
+    /* flex-shrink: 0 - prevents the title from shrinking */
+    flex-shrink: 0;
+}
+
+header nav {
+    /* Using flexbox for the navigation links */
+    display: flex;
+    /* gap - adds space between the nav links */
+    gap: var(--spacing-medium);
+    /* flex-wrap: wrap - allows the links to wrap on smaller screens */
+    flex-wrap: wrap;
+}
+
+header nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    padding: var(--spacing-small);
+}
+
+header nav a:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Main Container Styles */
+.container {
+    /* Using flexbox to create the two-column layout */
+    display: flex;
+    /* flex: 1 - makes the container take up all available space, pushing footer to bottom */
+    flex: 1;
+    /* flex-wrap: wrap - allows the sidebar to wrap below on smaller screens */
+    flex-wrap: wrap;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    background-color: var(--bg-gray);
+    padding: var(--spacing-medium);
+    /* flex-basis: var(--sidebar-width) - sets the initial width of the sidebar */
+    flex-basis: var(--sidebar-width);
+    /* flex-shrink: 0 - prevents the sidebar from shrinking below 200px on larger screens */
+    flex-shrink: 0;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    margin-bottom: var(--spacing-small);
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--text-dark);
+    display: block;
+    padding: var(--spacing-small);
+}
+
+.sidebar a:hover {
+    background-color: var(--bg-gray-hover);
+}
+
+/* Card Area Styles */
+.card-area {
+    padding: var(--spacing-medium);
+    /* flex: 1 - makes the card area take up all remaining space */
+    flex: 1;
+    /* Using flexbox to create the card grid */
+    display: flex;
+    /* flex-wrap: wrap - allows cards to wrap to new rows */
+    flex-wrap: wrap;
+    /* gap - adds space between the cards */
+    gap: var(--spacing-medium);
+}
+
+/* Card Styles */
+.card {
+    /* flex-basis with calc - sets the width of cards with gap consideration */
+    /* For 3 columns on large screens */
+    flex-basis: calc(33.333% - var(--spacing-medium));
+    /* flex-grow: 0 - prevents cards from growing beyond their flex-basis */
+    flex-grow: 0;
+    /* flex-shrink: 0 - prevents cards from shrinking below their flex-basis */
+    flex-shrink: 0;
+    background-color: var(--bg-light);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    
+    /* Using flexbox for the card's internal layout */
+    display: flex;
+    /* flex-direction: column - stacks the card content vertically */
+    flex-direction: column;
+}
+
+.card-image {
+    height: 150px;
+    background-color: var(--card-image-bg);
+}
+
+.card h3 {
+    padding: var(--spacing-medium) var(--spacing-medium) var(--spacing-small);
+}
+
+.card p {
+    padding: 0 var(--spacing-medium);
+    /* flex: 1 - makes the paragraph take up all available space, pushing the button to the bottom */
+    flex: 1;
+}
+
+.card button {
+    margin: var(--spacing-medium);
+    padding: var(--spacing-small) var(--spacing-medium);
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    border: none;
+    border-radius: calc(var(--card-border-radius) - 2px);
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+.card button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    text-align: center;
+    padding: var(--spacing-medium);
+}
+
+/* Media Queries for Responsiveness */
+/* Medium screens - 2 columns */
+@media (max-width: var(--breakpoint-medium)) {
+    .card {
+        /* flex-basis with calc - sets the width for 2 columns */
+        flex-basis: calc(50% - var(--spacing-medium));
+    }
+}
+
+/* Small screens - 1 column and sidebar adjustments */
+@media (max-width: var(--breakpoint-small)) {
+    header {
+        /* flex-direction: column - stacks the title and nav vertically on small screens */
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    header nav {
+        margin-top: var(--spacing-medium);
+        width: 100%;
+    }
+    
+    .container {
+        /* flex-direction: column - stacks the sidebar and card area vertically */
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        /* width: 100% - makes the sidebar full width */
+        width: 100%;
+        /* flex-basis: auto - allows the sidebar to size based on content */
+        flex-basis: auto;
+    }
+    
+    .card {
+        /* flex-basis: 100% - makes cards take full width */
+        flex-basis: 100%;
+    }
+}
+
+/* 
+Flexbox Tricky Scenario Discussion:
+
+One common pitfall when using Flexbox is the "equal height cards" challenge. When you have cards with 
+varying amounts of content, they naturally want to have different heights. This can lead to an uneven, 
+messy-looking grid.
+
+To solve this, I've used a combination of techniques from the CSS-Tricks Flexbox guide:
+
+1. Made each card a flex container with flex-direction: column
+2. Used flex: 1 on the card's paragraph element to make it expand and push the button to the bottom
+3. Ensured the cards themselves don't grow beyond their intended width with flex-grow: 0
+
+This approach ensures that all cards in a row have the same height, with their buttons aligned at the 
+bottom, regardless of content length. Without these flexbox properties, cards with less content would 
+be shorter than their neighbors, creating a jagged, unaligned appearance.
+
+Another common issue is unexpected wrapping behavior. By using flex-basis with calc() and setting 
+appropriate flex-shrink and flex-grow values, we can control exactly how the cards behave when the 
+viewport changes size.
+*/
